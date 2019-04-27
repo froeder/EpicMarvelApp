@@ -21,7 +21,7 @@
       </q-img>
 
       <q-card-section>
-        {{personagem.description || 'Sem informação'}}
+        {{personagem.description || 'Sem descrição'}}
       </q-card-section>
       <q-card-actions align="around">
         <q-btn flat round color="black" icon="visibility" />
@@ -38,6 +38,8 @@
 
 <script>
 import MarvelApi from '../services/MarvelAPI'
+import {Notify} from 'quasar'
+import { QSpinnerFacebook } from 'quasar'
 
 export default {
   name: 'PageIndex',
@@ -52,21 +54,46 @@ export default {
     // this.baixarPersonagens()
   },
   methods:{
+    showLoading () {
+      const spinner = typeof QSpinnerFacebook !== 'undefined'
+        ? QSpinnerFacebook // Non-UMD, imported above
+        : Quasar.components.QSpinnerFacebook // eslint-disable-line
+      /* End of Codepen workaround */
+
+      this.$q.loading.show({
+        spinner,
+        spinnerColor: 'yellow',
+        spinnerSize: 140,
+        backgroundColor: 'purple',
+        message: 'Pesquisando',
+        messageColor: 'black'
+      })
+    },
     buscarPersonagens(nome){
       var self = this
       self.personagem = []
-
+      this.showLoading()
       MarvelApi.getAllCharacters(nome, characters => {
         let resultado = characters.data.data.results
         if(resultado.length > 0){
           self.personagem = characters.data.data.results[0]
           self.imagem = self.personagem.thumbnail.path + '.jpg'
+          this.$q.loading.hide()
         } else{
-          console.log('nao encontrado')
+          this.$q.loading.hide()
+          Notify.create({
+            message: 'Nenhum personagem encontrado',
+            timeout: 1500
+          })
         }
         
       })
     }
+  },
+   beforeDestroy () {
+    
+      this.$q.loading.hide()
+    
   }
 }
 </script>
