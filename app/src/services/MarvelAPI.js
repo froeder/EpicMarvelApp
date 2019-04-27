@@ -12,7 +12,7 @@ var hash = md5(stringToHash);
 
 export default {
     getAllCharacters: (nome, callback) => {
-        const urlCharacters = urlBaseMarvel + 'characters?name=' +nome+ '&ts='+ts+ '&apikey=' + apiKey + '&hash=' + hash;
+        const urlCharacters = urlBaseMarvel + 'characters?nameStartsWith=' +nome+ '&orderBy=name' +'&ts='+ts+ '&apikey=' + apiKey + '&hash=' + hash;
         axios.get(urlCharacters).then((characters) => {
             if (callback) {
                 callback(characters);

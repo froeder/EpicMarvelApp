@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-     <q-input  style="color:white" @change="buscarPersonagens(busca)"  dark dense standout v-model="busca" input-class="text-left" placeholder="Digite o nome do personagem">
+     <q-input  style="color:white" @change="buscarPersonagens(busca)" dark dense standout v-model="busca" input-class="text-left" placeholder="Digite o nome do personagem">
       <template v-slot:append>
         <q-icon v-if="busca === ''" name="search" />
         <q-icon v-else name="clear" class="cursor-pointer" @click="busca = ''" />
@@ -10,6 +10,7 @@
     <q-card
       class="text-white"
       v-if="personagem.name"
+      style="background-color:#8E7D6B"
     > 
       <q-img
         :src="imagem"
@@ -20,7 +21,7 @@
       </q-img>
 
       <q-card-section>
-        {{personagem.description}}
+        {{personagem.description || 'Sem informação'}}
       </q-card-section>
       <q-card-actions align="around">
         <q-btn flat round color="black" icon="visibility" />
@@ -53,9 +54,17 @@ export default {
   methods:{
     buscarPersonagens(nome){
       var self = this
+      self.personagem = []
+
       MarvelApi.getAllCharacters(nome, characters => {
-        self.personagem = characters.data.data.results[0]
-        self.imagem = self.personagem.thumbnail.path + '.jpg'
+        let resultado = characters.data.data.results
+        if(resultado.length > 0){
+          self.personagem = characters.data.data.results[0]
+          self.imagem = self.personagem.thumbnail.path + '.jpg'
+        } else{
+          console.log('nao encontrado')
+        }
+        
       })
     }
   }
