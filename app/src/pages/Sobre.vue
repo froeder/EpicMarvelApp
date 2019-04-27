@@ -43,9 +43,7 @@ export default {
         border-style: solid;
         border-width: 2px ;
         border-color: #00EEFF ;
-   }
-   .q-card{
-       border-radius: 0px 40px 0px 40px ;
+        border-radius: 0px 40px 0px 40px ;
        height: 79vh
    }
 

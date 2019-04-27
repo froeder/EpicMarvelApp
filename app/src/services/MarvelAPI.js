@@ -10,12 +10,9 @@ var ts = new Date().getTime();
 var stringToHash = ts  + privateKey + apiKey;
 var hash = md5(stringToHash);
 
-
-
 export default {
-    getAllCharacters: (limit, callback) => {
-        const urlCharacters = urlBaseMarvel + 'characters?ts='+ts+ '&limit='+ limit + '&apikey=' + apiKey + '&hash=' + hash;
-        console.log(urlCharacters)
+    getAllCharacters: (nome, callback) => {
+        const urlCharacters = urlBaseMarvel + 'characters?name=' +nome+ '&ts='+ts+ '&apikey=' + apiKey + '&hash=' + hash;
         axios.get(urlCharacters).then((characters) => {
             if (callback) {
                 callback(characters);
@@ -23,9 +20,3 @@ export default {
         })
     }
 }
-
-// const hash = md5.create()
-        // hash.update(timestamp + PRIVATE_KEY + PUBLIC_KEY)
-
-        // const response = await fetch(`https://gateway.marvel.com/v1/public/characters?ts=${timestamp}&orderBy=name&limit=10&apikey=${PUBLIC_KEY}&hash=${hash.hex()}`)
-        // const responseJson = await response.json()

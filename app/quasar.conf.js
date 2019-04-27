@@ -44,10 +44,13 @@ module.exports = function (ctx) {
         'QImg',
         'QTabs',
         'QTab',
+        'QTabPanels',
+        'QTabPanel',
         'QRouteTab',
         'QFooter',
         'QSlideTransition',
-        'QSeparator'
+        'QSeparator',
+        'QInput'
       ],
 
       directives: [
@@ -83,7 +86,7 @@ module.exports = function (ctx) {
     },
 
     // animations: 'all', // --- includes all animations
-    animations: [],
+    animations: 'all',
 
     ssr: {
       pwa: false
@@ -98,8 +101,8 @@ module.exports = function (ctx) {
         // description: 'Best PWA App in town!',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#ffffff',
-        theme_color: '#027be3',
+        background_color: '#E30022',
+        theme_color: '#CC0000',
         icons: [
           {
             'src': 'statics/icons/icon-128x128.png',
@@ -131,7 +134,7 @@ module.exports = function (ctx) {
     },
 
     cordova: {
-      // id: 'org.cordova.quasar.app'
+      id: 'org.cordova.marvelfroeder.app'
       // noIosLegacyBuildFlag: true // uncomment only if you know what you are doing
     },
 

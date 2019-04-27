@@ -21,7 +21,9 @@
     </q-header>
 
     <q-page-container style="background: radial-gradient(#FBCA03 0%, #B97D10 100%)">
+      <q-slide-transition appear enter="fadeInRight" leave="fadeInRight" mode="fadeInRight">
       <router-view />
+      </q-slide-transition>
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">
