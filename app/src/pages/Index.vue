@@ -1,19 +1,28 @@
 <template>
   <q-page padding>
-    <q-card
+    <!-- <q-card
       class="my-card text-white"
-      style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-    >
-      <img :src="imagem">
-      <q-card-section>
-        <div class="text-h6">{{personagem.name}}</div>
-        <div class="text-subtitle2">by John Doe</div>
-      </q-card-section>
+      style="background: radial-gradient(circle, #D3AF37 0%, #D3AF37 100%)"
+    > 
+      <q-img
+        :src="imagem"
+        basic
+      >
+        <div class="absolute-bottom text-subtitle2 text-center">
+          {{personagem.name}}
+        </div>
+      </q-img>
 
       <q-card-section>
-        teste
+        {{personagem.description}}
       </q-card-section>
-    </q-card>
+      <q-card-actions align="around">
+        <q-btn flat round color="black" icon="visibility" />
+        <q-btn flat round color="yellow" icon="star" />
+        <q-btn flat round color="primary" icon="share" />
+      </q-card-actions>
+    </q-card> -->
+    
   </q-page>
 </template>
 
@@ -27,11 +36,12 @@ export default {
   name: 'PageIndex',
   data(){
     return{
-      personagem: []
+      personagem: [],
+      imagem: ''
     }
   },
   mounted(){
-    this.baixarPersonagens()
+    // this.baixarPersonagens()
   },
   methods:{
     baixarPersonagens(){
@@ -40,7 +50,8 @@ export default {
         self.personagem = characters.data.data.results[0]
 
         self.imagem = self.personagem.thumbnail.path + '.jpg'
-        console.log(characters.data.data.results[0])
+        
+        
       })
 
     }
