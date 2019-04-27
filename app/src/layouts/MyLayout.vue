@@ -30,7 +30,7 @@
         inline-label
         class="text-white shadow-2"
         style="background: linear-gradient(to right, #CC0000 0%, #E30019 100%)">
-        <q-tab name="random" icon="alarm"/>
+        <q-tab name="random" icon="shuffle"/>
         <q-tab @click="$router.push('/')" name="home" icon="home" />
         <q-tab name="star" icon="star"/> 
     </q-tabs>

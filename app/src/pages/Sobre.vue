@@ -4,12 +4,24 @@
         class="text-white card-sobre"
         >
         <q-card-section>
-            <div class="text-h6">Our Cshasnging Planet</div>
-            <div class="text-subtitle2">by John Doe</div>
+            <div class="text-h6 typewriter">Informações sobre o aplicativo</div>
         </q-card-section>
-
+        <q-separator color="yellow" inset />
         <q-card-section>
-            teste
+            V1.0.0 <br>
+            Este aplicativo consome a API da Marvel, que retorna informações sobre seus personagens. <br> 
+            A API pode ser acessada em https://developer.marvel.com . <br>
+            Por enquanto as informações estão em inglês pois é assim que a API retorna os dados, futuramente pretendo
+            traduzí-las para o pt-BR. <br><br>
+
+            Para mais informações acesse meu github: github.com/froeder ou froeder.github.io     <br><br>
+
+
+
+            <strong>MIT License </strong> <br>
+            Copyright (c) 2019 Jhonatan Froeder
+
+            
         </q-card-section>
         </q-card>
     </q-page>
@@ -34,6 +46,28 @@ export default {
    }
    .q-card{
        border-radius: 0px 40px 0px 40px ;
-       height: 80vh
+       height: 79vh
    }
+
+   .typewriter{
+        overflow: hidden; /* Ensures the content is not revealed until the animation */
+        border-right: .1em solid blue; /* The typwriter cursor */
+        white-space: nowrap; /* Keeps the content on a single line */
+        margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+        animation: 
+            typing 1.5s steps(50, end),
+            blink-caret .85s step-end infinite;
+    }
+
+    /* The typing effect */
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+
+    /* The typewriter cursor effect */
+    @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: #00EEFF; }
+    }
 </style>

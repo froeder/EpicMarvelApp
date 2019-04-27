@@ -45,7 +45,9 @@ module.exports = function (ctx) {
         'QTabs',
         'QTab',
         'QRouteTab',
-        'QFooter'
+        'QFooter',
+        'QSlideTransition',
+        'QSeparator'
       ],
 
       directives: [
