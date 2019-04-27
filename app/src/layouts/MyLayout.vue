@@ -5,7 +5,7 @@
       <q-toolbar>
 
         <q-toolbar-title>
-          Quasar App
+          <span class="marvel">MARVEL</span>
         </q-toolbar-title>
         <q-btn
           flat
@@ -20,7 +20,7 @@
       
     </q-header>
 
-    <q-page-container>
+    <q-page-container style="background: radial-gradient(#FBCA03 0%, #B97D10 100%)">
       <router-view />
     </q-page-container>
 
@@ -60,4 +60,8 @@ export default {
 </script>
 
 <style>
+  .marvel{
+     font-family: "Marvel";
+     font-size: 2em ;
+  }
 </style>
