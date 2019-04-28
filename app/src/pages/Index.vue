@@ -21,7 +21,7 @@
       </q-img>
 
       <q-card-section>
-        {{personagem.description || 'Sem descrição'}}
+        {{descricao}}
       </q-card-section>
       <q-card-actions align="around">
         <q-btn flat round color="black" icon="visibility" />
@@ -46,12 +46,14 @@ export default {
   data(){
     return{
       personagem: [],
+      descricao: '',
       imagem: '',
       busca:''
     }
   },
   mounted(){
     // this.baixarPersonagens()
+    
   },
   methods:{
     showLoading () {
@@ -64,20 +66,37 @@ export default {
         spinner,
         spinnerColor: 'yellow',
         spinnerSize: 140,
-        backgroundColor: 'purple',
+        backgroundColor: 'red',
         message: 'Pesquisando',
         messageColor: 'black'
       })
     },
+    traduz(personagem){
+      var self = this
+      let texto = personagem.toString()
+      if(texto == ''){
+        self.descricao = 'Sem descrição'
+      } else {
+        console.log(personagem)
+        var googleTranslate = require('google-translate')('AIzaSyC_Vt7D6DAWGohSGOFmD6urdGCvcoodmts');
+        googleTranslate.translate(texto, 'pt', function(err, translation) {
+          self.descricao = translation.translatedText
+        });
+      }        
+     
+    },
     buscarPersonagens(nome){
       var self = this
       self.personagem = []
+      self.descricao = ''
       this.showLoading()
       MarvelApi.getAllCharacters(nome, characters => {
         let resultado = characters.data.data.results
         if(resultado.length > 0){
+          this.traduz(characters.data.data.results[0].description)
           self.personagem = characters.data.data.results[0]
           self.imagem = self.personagem.thumbnail.path + '.jpg'
+
           this.$q.loading.hide()
         } else{
           this.$q.loading.hide()

@@ -11,8 +11,7 @@
             V1.0.0 <br>
             Este aplicativo consome a API da Marvel, que retorna informações sobre seus personagens. <br> 
             A API pode ser acessada em https://developer.marvel.com . <br>
-            Por enquanto as informações estão em inglês pois é assim que a API retorna os dados, futuramente pretendo
-            traduzí-las para o pt-BR. <br><br>
+            Os textos são traduzidos usando a Google Cloud Translate API. <br><br>
 
             Para mais informações acesse meu github: github.com/froeder ou froeder.github.io     <br><br>
 
