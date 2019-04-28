@@ -53,7 +53,8 @@ export default {
       // personagem: [],
       personagens: [],
       atribuicao: '',
-      busca:''
+      busca:'',
+      panel: 'mails'
     }
   },
   mounted(){

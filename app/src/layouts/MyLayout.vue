@@ -21,9 +21,14 @@
     </q-header>
 
     <q-page-container style="background: radial-gradient(#FBCA03 0%, #B97D10 100%)">
-      <q-slide-transition appear enter="fadeInRight" leave="fadeInRight" mode="fadeInRight">
+      <transition
+        name="transitions"
+        enter-active-class="animated zoomIn"
+        leave-active-class="animated zoomOut"
+        mode="out-in"
+      >
       <router-view />
-      </q-slide-transition>
+      </transition>
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">
