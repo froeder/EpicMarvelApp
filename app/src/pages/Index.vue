@@ -121,16 +121,18 @@ export default {
     favorita(personagem){
       let self = this
       
-      var existing = localStorage.getItem('favorites');
+      // var existing = localStorage.getItem('favorites');
 
-      // If no existing data, create an array
-      // Otherwise, convert the localStorage string to an array
-      existing = existing ? existing.split(',') : [];
+      // // If no existing data, create an array
+      // // Otherwise, convert the localStorage string to an array
+      // existing = existing ? existing.split(',') : [];
 
-      // Add new data to localStorage Array
-      existing.push(JSON.stringify(personagem))
+      // // Add new data to localStorage Array
+      // existing.push(JSON.stringify(personagem))
 
-      localStorage.setItem('favorites', existing.toString())
+      // localStorage.setItem('favorites', existing.toString())
+
+      localStorage.setItem(personagem.nome+personagem.id, JSON.stringify(personagem))
     
       personagem.favs = 'star'
     }

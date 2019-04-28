@@ -20,10 +20,11 @@
             <q-separator/>
             <q-card-actions align="around">
                 <q-btn flat round color="black" icon="visibility" />
-                <q-btn flat round color="yellow" :icon="favs" @click="favorita(personagem)" />
+                <q-btn flat round color="red" icon="delete" @click="remove(personagens, personagem)" />
                 <q-btn flat round color="primary" icon="share" />
             </q-card-actions>
         </q-card>
+        <br>
         <span>Data provided by Marvel. © 2019 MARVEL</span>
             
     </q-page>
@@ -37,7 +38,7 @@ export default {
   data(){
     return{
       // personagem: [],
-      personagens: {},
+      personagens: [],
       favs: 'star'
     }
   },
@@ -45,16 +46,28 @@ export default {
     this.pegaFavoritos()
   },
   methods:{
-      pegaFavoritos(){
+    pegaFavoritos(){
         let self = this
-        let dado = localStorage.getItem('favorites')
+        var 
+        keys = Object.keys(localStorage),
+        i = 0, key;
 
-        let aux = "["+ dado.toString() +"]"
-        self.personagens = JSON.parse(aux)
-      },
-      favorita(personagem){
-          console.log(personagem)
-      }
+        for (; key = keys[i]; i++) {
+            self.personagens.push(JSON.parse(localStorage.getItem(key)));
+        }
+
+    console.log(self.personagens)
+    },
+    remove(personagens, personagem){
+        localStorage.removeItem(personagem.nome+personagem.id)
+
+        for(var i in personagens){
+            if(personagem.nome === personagens[i].nome){
+                personagens = personagens.splice(i, 1)
+            }
+        }
+        
+    }
   }
 }
 </script>
