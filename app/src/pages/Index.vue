@@ -120,21 +120,16 @@ export default {
     },
     favorita(personagem){
       let self = this
-      
-      // var existing = localStorage.getItem('favorites');
-
-      // // If no existing data, create an array
-      // // Otherwise, convert the localStorage string to an array
-      // existing = existing ? existing.split(',') : [];
-
-      // // Add new data to localStorage Array
-      // existing.push(JSON.stringify(personagem))
-
-      // localStorage.setItem('favorites', existing.toString())
 
       localStorage.setItem(personagem.nome+personagem.id, JSON.stringify(personagem))
     
       personagem.favs = 'star'
+      Notify.create({
+        color: 'positive',
+        message: personagem.nome +' foi adicionado aos favoritos',
+        timeout: 1000,
+        position: 'top'
+      })
     }
   },
    beforeDestroy () {

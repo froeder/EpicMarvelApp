@@ -32,6 +32,7 @@
 
 <script>
 import {LocalStorage} from 'quasar'
+import {Notify} from 'quasar'
 
 export default {
   name: 'PageIndex',
@@ -55,11 +56,18 @@ export default {
         for (; key = keys[i]; i++) {
             self.personagens.push(JSON.parse(localStorage.getItem(key)));
         }
-
-    console.log(self.personagens)
     },
     remove(personagens, personagem){
+        
         localStorage.removeItem(personagem.nome+personagem.id)
+        let nome = personagem.nome
+
+        Notify.create({
+            color: 'positive',
+            message: nome +' foi removido dos favoritos',
+            timeout:1000,
+            position: 'top'
+        })
 
         for(var i in personagens){
             if(personagem.nome === personagens[i].nome){
