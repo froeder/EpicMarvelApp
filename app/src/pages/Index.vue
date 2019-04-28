@@ -1,15 +1,18 @@
 <template>
   <q-page padding>
+    <span class="text-weight-thin">Página Inicial</span>
      <q-input  style="color:white" @change="buscarPersonagens(busca)" dark dense standout v-model="busca" input-class="text-left" placeholder="Digite o nome do personagem">
       <template v-slot:append>
         <q-icon v-if="busca === ''" name="search" />
         <q-icon v-else name="clear" class="cursor-pointer" @click="busca = ''" />
       </template>
     </q-input>
+    <span v-if="busca === ''" class="text-weight-light">O nome deve estar em inglês</span>
     <br>
     <q-card
       class="text-white"
       v-for="personagem in personagens"
+      :key="personagem.nome"
       style="background-color:#8E7D6B ; margin-bottom:1em"
     > 
       <q-img
@@ -26,11 +29,11 @@
       <q-separator/>
       <q-card-actions align="around">
         <q-btn flat round color="black" icon="visibility" />
-        <q-btn flat round color="yellow" icon="star" @click="favorita(personagem)" />
+        <q-btn flat round color="yellow" :icon="personagem.favs" @click="favorita(personagem)" />
         <q-btn flat round color="primary" icon="share" />
       </q-card-actions>
     </q-card>
-    <span>{{atribuicao}}</span>
+    <span v-if="personagens.nome != []">{{atribuicao}}</span>
   </q-page>
 </template>
 
@@ -86,7 +89,8 @@ export default {
             nome: resultado[i].name,
             descricao: desc,
             imagem: resultado[i].thumbnail.path+'.'+resultado[i].thumbnail.extension,
-            id: resultado[i].id
+            id: resultado[i].id,
+            favs: 'star_border'
           })
         });            
       }  
@@ -115,6 +119,7 @@ export default {
       // console.log(self.personagens)
     },
     favorita(personagem){
+      let self = this
       
       var existing = localStorage.getItem('favorites');
 
@@ -126,7 +131,8 @@ export default {
       existing.push(JSON.stringify(personagem))
 
       localStorage.setItem('favorites', existing.toString())
-
+    
+      personagem.favs = 'star'
     }
   },
    beforeDestroy () {
