@@ -10,7 +10,6 @@
     <q-card
       class="text-white"
       v-for="personagem in personagens"
-      :key="personagem.id"
       style="background-color:#8E7D6B ; margin-bottom:1em"
     > 
       <q-img
@@ -27,11 +26,11 @@
       <q-separator/>
       <q-card-actions align="around">
         <q-btn flat round color="black" icon="visibility" />
-        <q-btn flat round color="yellow" icon="star" />
+        <q-btn flat round color="yellow" icon="star" @click="favorita(personagem)" />
         <q-btn flat round color="primary" icon="share" />
       </q-card-actions>
     </q-card>
-
+    <span>{{atribuicao}}</span>
   </q-page>
 </template>
 
@@ -42,6 +41,7 @@
 import MarvelApi from '../services/MarvelAPI'
 import {Notify} from 'quasar'
 import { QSpinnerFacebook } from 'quasar'
+import {LocalStorage} from 'quasar'
 
 export default {
   name: 'PageIndex',
@@ -49,11 +49,13 @@ export default {
     return{
       // personagem: [],
       personagens: [],
+      atribuicao: '',
       busca:''
     }
   },
   mounted(){
     // this.baixarPersonagens()
+    console.log('abriu')
     
   },
   methods:{
@@ -90,29 +92,45 @@ export default {
       }  
     },
     buscarPersonagens(nome){
-      var self = this
-      this.showLoading()
-      MarvelApi.getAllCharacters(nome, characters => {
-        let resultado = characters.data.data.results
-        if(resultado.length > 0){
-          this.traduz(resultado)
-          this.$q.loading.hide()
-        } else{
-          this.$q.loading.hide()
-          Notify.create({
-            message: 'Nenhum personagem encontrado',
-            timeout: 1500
-          })
-        }
-        
-      })
+      if(nome!=''){
+        var self = this
+        this.personagens = []
+        this.showLoading()
+        MarvelApi.getAllCharacters(nome, characters => {
+          let resultado = characters.data.data.results
+          self.atribuicao = characters.data.attributionText
+          if(resultado.length > 0){
+            this.traduz(resultado)
+            this.$q.loading.hide()
+          } else{
+            this.$q.loading.hide()
+            Notify.create({
+              message: 'Nenhum personagem encontrado',
+              timeout: 1500
+            })
+          }
+          
+        })
+      }
       // console.log(self.personagens)
+    },
+    favorita(personagem){
+      
+      var existing = localStorage.getItem('favorites');
+
+      // If no existing data, create an array
+      // Otherwise, convert the localStorage string to an array
+      existing = existing ? existing.split(',') : [];
+
+      // Add new data to localStorage Array
+      existing.push(JSON.stringify(personagem))
+
+      localStorage.setItem('favorites', existing.toString())
+
     }
   },
    beforeDestroy () {
-    
-      this.$q.loading.hide()
-    
+    this.$q.loading.hide()
   }
 }
 </script>

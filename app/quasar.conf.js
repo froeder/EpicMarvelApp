@@ -61,7 +61,8 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify',
-        'Loading'
+        'Loading',
+        'LocalStorage'
       ]
 
       // iconSet: 'ionicons-v4'
