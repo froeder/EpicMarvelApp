@@ -37,9 +37,9 @@
         inline-label
         class="text-white shadow-2"
         style="background: linear-gradient(to right, #CC0000 0%, #E30019 100%)">
-        <q-tab name="random" icon="shuffle"/>
-        <q-tab @click="$router.push('/')" name="home" icon="home" />
-        <q-tab @click="$router.push('/favoritos')" name="star" icon="star"/> 
+        <q-tab @click="rota('/aleatorio')" name="random" icon="shuffle"/>
+        <q-tab @click="rota('/')" name="home" icon="home" />
+        <q-tab @click="rota('/favoritos')" name="star" icon="star"/> 
     </q-tabs>
     </q-footer>
 
@@ -58,9 +58,8 @@ export default {
     }
   },
   methods: {
-    openURL,
-    teste(){
-      console.log('teste')
+    rota(rota){
+      this.$router.push(rota)
     }
   }
 }

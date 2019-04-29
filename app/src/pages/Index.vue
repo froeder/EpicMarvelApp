@@ -58,8 +58,6 @@ export default {
     }
   },
   mounted(){
-    // this.baixarPersonagens()
-    console.log('abriu')
     
   },
   methods:{

@@ -18,5 +18,17 @@ export default {
                 callback(characters);
             }
         })
+    },
+    getRandomCharacters: (callback) => {
+        var min=1; 
+        var max=1490;  
+        var offset =Math.floor(Math.random() * (+max - +min)) + +min; 
+
+        const urlCharacters = urlBaseMarvel + 'characters?limit=1&offset='+offset+'&orderBy=name' +'&ts='+ts+ '&apikey=' + apiKey + '&hash=' + hash;
+        axios.get(urlCharacters).then((characters) => {
+            if (callback) {
+                callback(characters);
+            }
+        })
     }
 }

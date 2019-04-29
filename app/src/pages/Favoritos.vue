@@ -24,6 +24,7 @@
                 <q-btn flat round color="primary" icon="share" />
             </q-card-actions>
         </q-card>
+        
         <br>
         <span>Data provided by Marvel. © 2019 MARVEL</span>
             
@@ -40,7 +41,8 @@ export default {
     return{
       // personagem: [],
       personagens: [],
-      favs: 'star'
+      favs: 'star',
+      isHidden: false
     }
   },
   mounted(){
@@ -58,9 +60,10 @@ export default {
         }
     },
     remove(personagens, personagem){
+         let nome = personagem.nome
         
         localStorage.removeItem(personagem.nome+personagem.id)
-        let nome = personagem.nome
+       
 
         Notify.create({
             color: 'positive',
