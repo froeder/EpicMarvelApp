@@ -21,7 +21,7 @@
         </q-card-section>
         <q-separator/>
         <q-card-actions align="around">
-            <q-btn flat round color="black" icon="visibility" />
+            <q-btn flat round color="black" icon="visibility" @click="detalhes(personagem)" />
             <q-btn flat round color="yellow" :icon="personagem.favs" @click="favorita(personagem)" />
             <q-btn flat round color="primary" icon="share" />
         </q-card-actions>
@@ -94,17 +94,22 @@ export default {
         // console.log(self.personagens)
         },
         favorita(personagem){
-        let self = this
+            let self = this
 
-        localStorage.setItem(personagem.nome+personagem.id, JSON.stringify(personagem))
-        
-        personagem.favs = 'star'
-        Notify.create({
-            color: 'positive',
-            message: personagem.nome +' foi adicionado aos favoritos',
-            timeout: 1000,
-            position: 'top'
-        })
+            localStorage.setItem(personagem.nome+personagem.id, JSON.stringify(personagem))
+            
+            personagem.favs = 'star'
+            Notify.create({
+                color: 'positive',
+                message: personagem.nome +' foi adicionado aos favoritos',
+                timeout: 1000,
+                position: 'top'
+            })
+        },
+        detalhes(personagem){
+            console.log(personagem)
+            this.$router.push({name: 'Detalhes', params:{id: personagem.id}})
+            
         }
     },
     beforeDestroy () {

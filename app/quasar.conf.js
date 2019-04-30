@@ -54,7 +54,11 @@ module.exports = function (ctx) {
         'QSpinner',
         'QTimeline',
         'QTimelineEntry',
-        'QSpinnerTail'
+        'QSpinnerTail',
+        'QSpace',
+        'QCarousel',
+        'QCarouselControl',
+        'QCarouselSlide'
       ],
 
       directives: [

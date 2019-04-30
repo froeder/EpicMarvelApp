@@ -1,6 +1,6 @@
 <template>
     <q-page padding>
-        <span>Personagem Detalhado</span>
+        <span class="text-weight-thin">Detalhes sobre o personagem</span>
         <div v-for="personagem in personagem">
             <q-card
                 class="text-white"
@@ -15,36 +15,38 @@
             </q-img>
 
             <q-card-section>
-                {{personagem.descricao}}
+                {{personagem.descricao || 'Sem descrição'}}
             </q-card-section>
             <q-separator/>
             </q-card>
     
             
-            <q-card>
+            <q-card style="background: radial-gradient(#fce700 0%, #fc9f00 100%)">
                 <div class="text-center" v-if="loading == true">
-                     
                     <q-spinner-tail
                         color="yellow"
                         size="5em"/>
                         Baixando Revistas
                 </div>
                 
-                <q-card-section v-if="loading == false">
-                    <span class="marvel">QUADRINHOS</span> <br>
-                    <span>Todas as aparições do personagem</span>
-                    <q-timeline color="secondary">
+                <q-card-section  v-if="loading == false">
+                    <span class="marvel" style="color:white">QUADRINHOS</span> <br>
+                    <span>O personagem aparece em {{qtde_total}} revistas.</span> <br>
+                    <span>Aparições mais recentes do personagem:</span>
+                    <q-timeline color="accent" style="border:1px 1px black">
                         <q-timeline-entry
                             v-for="comic in quadrinhos"
                             :title="comic.title"
                             :subtitle="converte(comic.dates[0].date)"
                         >
+                            <q-btn outline @click="detalhesRevista(comic.id)">Ver detalhes</q-btn>
                         </q-timeline-entry>
+                        
                     </q-timeline>
                 </q-card-section>
-            </q-card>                           
-            <q-btn style="margin-top:1em" color="info" @click="$router.go(-1)">Voltar</q-btn>
+            </q-card>     
         </div>
+        <br>
         <span>Data provided by Marvel. © 2019 MARVEL</span>
     </q-page>
 </template>
@@ -62,7 +64,8 @@ export default {
             id: this.$route.params.id,
             quadrinhos: {},
             quadrinho: [],
-            loading: true
+            loading: true,
+            qtde_total: 0
         }
     },
     mounted(){
@@ -70,6 +73,9 @@ export default {
         this.loading = true
     },
     methods:{
+        detalhesRevista(id){
+            this.$router.push({name: 'DetalhesRevista', params:{id: id}})
+        },
         showLoading () {
             const spinner = typeof QSpinnerFacebook !== 'undefined'
                 ? QSpinnerFacebook // Non-UMD, imported above
@@ -81,7 +87,7 @@ export default {
                 spinnerColor: 'yellow',
                 spinnerSize: 140,
                 backgroundColor: 'red',
-                message: 'Pesquisando',
+                message: 'Biaxando Personagem',
                 messageColor: 'black'
             })
         },
@@ -95,7 +101,7 @@ export default {
             let self = this
             MarvelApi.getCharacterComics(id, comics => {
                 let comic = comics.data.data.results
-                    
+                self.qtde_total = comics.data.data.total
                 self.quadrinhos = comic
                 self.loading = false
             }) 
@@ -145,9 +151,6 @@ export default {
 <style scoped>
     .marvel{
         font-family: "Marvel";
-    }
-    .quadrinho{
-        background-image: 
     }
 
 </style>

@@ -12,7 +12,7 @@ var hash = md5(stringToHash);
 
 export default {
     getAllCharacters: (nome, callback) => {
-        const urlCharacters = urlBaseMarvel + 'characters?nameStartsWith=' +nome+ '&orderBy=name' +'&ts='+ts+ '&apikey=' + apiKey + '&hash=' + hash;
+        const urlCharacters = urlBaseMarvel + 'characters?limit=100&nameStartsWith=' +nome+ '&orderBy=name' +'&ts='+ts+ '&apikey=' + apiKey + '&hash=' + hash;
         axios.get(urlCharacters).then((characters) => {
             if (callback) {
                 callback(characters);
@@ -40,10 +40,18 @@ export default {
         })
     },
     getCharacterComics: (id, callback) => {
-        const urlCharacters = urlBaseMarvel + 'characters/' +id+ '/comics?limit=100'+'&ts='+ts+'&apikey=' + apiKey + '&hash=' + hash;
+        const urlCharacters = urlBaseMarvel + 'characters/' +id+ '/comics?limit=50'+'&ts='+ts+'&apikey=' + apiKey + '&hash=' + hash;
         axios.get(urlCharacters).then((characters) => {
             if (callback) {
                 callback(characters);
+            }
+        })
+    },
+    getComic: (id, callback) => {
+        const urlCharacters = urlBaseMarvel + 'comics/' +id+ '?ts='+ts+'&apikey=' + apiKey + '&hash=' + hash;
+        axios.get(urlCharacters).then((comics) => {
+            if (comics) {
+                callback(comics);
             }
         })
     },

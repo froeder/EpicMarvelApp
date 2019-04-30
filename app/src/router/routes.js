@@ -9,7 +9,8 @@ const routes = [
       { path: 'sobre' ,name:'Sobre', component: () => import('pages/Sobre.vue') },
       { path: 'favoritos' ,name:'Favoritos', component: () => import('pages/Favoritos.vue') },
       { path: 'aleatorio' ,name:'Aleatorio', component: () => import('pages/Aleatorio.vue') },
-      { path: 'detalhes/:id' ,name:'Detalhes', component: () => import('pages/Detalhes.vue') }
+      { path: 'detalhes/:id' ,name:'Detalhes', component: () => import('pages/Detalhes.vue') },
+      { path: 'detalhes/revista/:id' ,name:'DetalhesRevista', component: () => import('pages/DetalhesRevista.vue') }
     ]
   }
 ]
