@@ -19,7 +19,7 @@
             </q-card-section>
             <q-separator/>
             <q-card-actions align="around">
-                <q-btn flat round color="black" icon="visibility" />
+                <q-btn flat round color="black" icon="visibility" @click="detalhes(personagem)" />
                 <q-btn flat round color="red" icon="delete" @click="remove(personagens, personagem)" />
                 <q-btn flat round color="primary" icon="share" />
             </q-card-actions>
@@ -76,7 +76,11 @@ export default {
             if(personagem.nome === personagens[i].nome){
                 personagens = personagens.splice(i, 1)
             }
-        }
+        } 
+    },
+    detalhes(personagem){
+        console.log(personagem)
+        this.$router.push({name: 'Detalhes', params:{id: personagem.id}})
         
     }
   }

@@ -51,7 +51,10 @@ module.exports = function (ctx) {
         'QSlideTransition',
         'QSeparator',
         'QInput',
-        'QSpinner'
+        'QSpinner',
+        'QTimeline',
+        'QTimelineEntry',
+        'QSpinnerTail'
       ],
 
       directives: [

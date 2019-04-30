@@ -30,5 +30,21 @@ export default {
                 callback(characters);
             }
         })
-    }
+    },
+    getCharacter: (id, callback) => {
+        const urlCharacters = urlBaseMarvel + 'characters/' +id+ '?ts='+ts+'&apikey=' + apiKey + '&hash=' + hash;
+        axios.get(urlCharacters).then((characters) => {
+            if (callback) {
+                callback(characters);
+            }
+        })
+    },
+    getCharacterComics: (id, callback) => {
+        const urlCharacters = urlBaseMarvel + 'characters/' +id+ '/comics?limit=100'+'&ts='+ts+'&apikey=' + apiKey + '&hash=' + hash;
+        axios.get(urlCharacters).then((characters) => {
+            if (callback) {
+                callback(characters);
+            }
+        })
+    },
 }

@@ -26,6 +26,7 @@
             <q-btn flat round color="primary" icon="share" />
         </q-card-actions>
         </q-card>
+        <span v-if="personagem.nome != []">{{atribuicao}}</span>
     </q-page>
 </template>
 
