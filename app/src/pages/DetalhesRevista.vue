@@ -68,6 +68,7 @@ import MarvelApi from '../services/MarvelAPI'
 import {Notify} from 'quasar'
 import { QSpinnerFacebook } from 'quasar'
 import {LocalStorage} from 'quasar'
+import SocialSharing from 'vue-social-sharing'
 
 export default {
     data(){
@@ -78,6 +79,9 @@ export default {
             slide: 1,
             fullscreen: false
         }
+    },
+    components:{
+        SocialSharing
     },
     mounted(){
 
@@ -93,7 +97,6 @@ export default {
                 googleTranslate.translate(resultado.description, 'pt', function(err, translation) {
                 let desc = translation.translatedText
                 self.quadrinho.description = desc
-                console.log(self.quadrinho)
                 // localStorage.setItem(self.id, JSON.stringify(self.quadrinho))
             });
             } 

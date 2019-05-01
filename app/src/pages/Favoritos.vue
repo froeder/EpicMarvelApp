@@ -21,7 +21,22 @@
             <q-card-actions align="around">
                 <q-btn flat round color="black" icon="visibility" @click="detalhes(personagem)" />
                 <q-btn flat round color="red" icon="delete" @click="remove(personagens, personagem)" />
-                <q-btn flat round color="primary" icon="share" />
+                <social-sharing 
+                    url="https://play.google.com/store/apps/details?id=org.cordova.marvelfroeder.app"
+                    :title="personagem.nome"
+                    :description="personagem.descricao"
+                    :quote="personagem.nome+' '+personagem.descricao"
+                    hashtags="marvel studio, avengers"
+                    inline-template>
+                <div>
+                    <network network="facebook">
+                        <q-btn flat round color="primary" icon="share" />Facebook
+                    </network>
+                    <network network="whatsapp">
+                        <q-btn flat round color="primary" icon="share" /> WhatsApp
+                    </network>
+                </div>
+                </social-sharing>
             </q-card-actions>
         </q-card>
         
@@ -34,6 +49,7 @@
 <script>
 import {LocalStorage} from 'quasar'
 import {Notify} from 'quasar'
+import SocialSharing from 'vue-social-sharing'
 
 export default {
   name: 'PageIndex',
@@ -44,6 +60,9 @@ export default {
       favs: 'star',
       isHidden: false
     }
+  },
+  components:{
+      SocialSharing
   },
   mounted(){
     this.pegaFavoritos()

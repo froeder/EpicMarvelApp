@@ -22,7 +22,7 @@
           {{personagem.nome}}
         </div>
       </q-img>
-
+ 
       <q-card-section>
         {{personagem.descricao || 'Sem descrição'}}
       </q-card-section>
@@ -30,7 +30,22 @@
       <q-card-actions align="around">
         <q-btn flat round color="black" icon="visibility" @click="detalhes(personagem)" />
         <q-btn flat round color="yellow" :icon="personagem.favs" @click="favorita(personagem)" />
-        <q-btn flat round color="primary" icon="share" />
+        <social-sharing 
+            url="https://play.google.com/store/apps/details?id=org.cordova.marvelfroeder.app"
+            :title="personagem.nome"
+            :description="personagem.descricao"
+            :quote="personagem.nome+' '+personagem.descricao"
+            hashtags="marvel studio, avengers"
+            inline-template>
+        <div>
+            <network network="facebook">
+                <q-btn flat round color="primary" icon="share" />Facebook
+            </network>
+            <network network="whatsapp">
+                <q-btn flat round color="primary" icon="share" /> WhatsApp
+            </network>
+        </div>
+        </social-sharing>
       </q-card-actions>
     </q-card>
     <span v-if="personagens.nome != []">{{atribuicao}}</span>
@@ -45,6 +60,7 @@ import MarvelApi from '../services/MarvelAPI'
 import {Notify} from 'quasar'
 import { QSpinnerFacebook } from 'quasar'
 import {LocalStorage} from 'quasar'
+import SocialSharing from 'vue-social-sharing'
 
 export default {
   name: 'PageIndex',
@@ -56,6 +72,9 @@ export default {
       busca:'',
       panel: 'mails'
     }
+  },
+  components:{
+    SocialSharing
   },
   mounted(){
     

@@ -15,14 +15,11 @@
 
             Para mais informações acesse meu github: github.com/froeder ou froeder.github.io     <br><br>
 
-
-
             <strong>MIT License </strong> <br>
             Copyright (c) 2019 Jhonatan Froeder
-
             
         </q-card-section>
-        </q-card>
+        </q-card> <br>
     </q-page>
 </template>
 

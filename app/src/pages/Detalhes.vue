@@ -20,18 +20,34 @@
             <q-separator/>
             <q-card-actions align="around">
                 <q-btn flat round color="yellow" :icon="personagem.favs" @click="favorita(personagem)" />
-                <q-btn flat round color="primary" icon="share" />
+                <!-- <q-btn flat round color="primary" icon="share" @click="compartilhar(personagem)" /> -->
+                <social-sharing 
+                    url="https://play.google.com/store/apps/details?id=org.cordova.marvelfroeder.app"
+                    :title="personagem.nome"
+                    :description="personagem.descricao"
+                    :quote="personagem.nome+' '+personagem.descricao"
+                    hashtags="marvel studio, avengers"
+                    inline-template>
+                <div>
+                    <network network="facebook">
+                        <q-btn flat round color="primary" icon="share" />Facebook
+                    </network>
+                    <network network="whatsapp">
+                        <q-btn flat round color="primary" icon="share" /> WhatsApp
+                    </network>
+                </div>
+                </social-sharing>
             </q-card-actions>
             </q-card>
     
-            
-            <q-card v-if="quadrinhos" style="background: radial-gradient(#fce700 0%, #fc9f00 100%)">
-                <div class="text-center" v-if="!qtde_total">
+            <div class="text-center" v-if="!qtde_total">
                     <q-spinner-tail
                         color="purple"
                         size="5em"/>
                         Baixando Revistas
                 </div>
+            <q-card v-if="qtde_total > 0" style="background: radial-gradient(#fce700 0%, #fc9f00 100%)">
+                
                 
                 <q-card-section >
                     <span class="marvel" style="color:white">QUADRINHOS</span> <br>
@@ -42,6 +58,7 @@
                             v-for="comic in quadrinhos"
                             :title="comic.title"
                             :subtitle="converte(comic.dates[0].date)"
+                            :key="comic.title"
                         >
                             <q-btn outline @click="detalhesRevista(comic.id)">Ver detalhes</q-btn>
                         </q-timeline-entry>
@@ -60,6 +77,7 @@ import MarvelApi from '../services/MarvelAPI'
 import {Notify} from 'quasar'
 import { QSpinnerFacebook } from 'quasar'
 import {LocalStorage, SessionStorage} from 'quasar'
+import SocialSharing from 'vue-social-sharing'
 
 export default {
     data(){
@@ -71,6 +89,9 @@ export default {
             loading: true,
             qtde_total: 0
         }
+    },
+    components:{
+        SocialSharing
     },
     mounted(){
         this.buscarPersonagens(this.id)
@@ -117,9 +138,7 @@ export default {
         buscaQuadrinhos(id){
             let self = this
             if(sessionStorage.getItem('quadrinhos'+id)){
-                console.log('a')
                 self.loading = false
-                console.log(self.loading)
                 self.quadrinhos = JSON.parse(sessionStorage.getItem('quadrinhos'+id))
                 self.qtde_total = sessionStorage.getItem('qtde_quadrinho'+id)
                 self.loading = false
@@ -142,11 +161,13 @@ export default {
            
             this.showLoading()
             self.personagem =  JSON.parse(sessionStorage.getItem('personagem'+self.id))
-            console.log(self.personagem)
             self.buscaQuadrinhos(self.personagem.id)
             this.$q.loading.hide()
         
         },
+        compartilhar(personagem){
+            console.log(personagem)
+        }
     },
     beforeDestroy () {
         this.$q.loading.hide()
