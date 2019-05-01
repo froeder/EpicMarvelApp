@@ -11,7 +11,7 @@
           flat
           dense
           round
-          to="sobre"
+          @click="rota('/sobre')"
           aria-label="Informações"
         >
           <q-icon name="info" />

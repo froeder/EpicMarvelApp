@@ -34,8 +34,9 @@
             </q-card-actions>
         </q-card>
 
-        <span class="marvel" style="color:white ;margin-top:1em">IMAGENS</span>
-        <q-carousel
+        <span v-if="quadrinho.images.length > 0" class="marvel" style="color:white ;margin-top:1em">IMAGENS</span>
+        <q-carousel 
+            v-if="quadrinho.images.length > 0"
             style="margin-top:1em"
             animated
             swipeable
@@ -43,9 +44,21 @@
             arrows
             thumbnails
             infinite
+            :fullscreen.sync="fullscreen"
         >
             <q-carousel-slide :name="image.path" v-for="image in quadrinho.images" :img-src="image.path+'.'+image.extension" />
-            
+            <template v-slot:control>
+                <q-carousel-control
+                position="bottom-right"
+                :offset="[18, 18]"
+                >
+                <q-btn
+                    push round dense color="white" text-color="primary"
+                    :icon="fullscreen ? 'fullscreen_exit' : 'fullscreen'"
+                    @click="fullscreen = !fullscreen"
+                />
+                </q-carousel-control>
+            </template>
         </q-carousel>
     </q-page>
 </template>
@@ -62,7 +75,8 @@ export default {
             id: this.$route.params.id ,
             quadrinho: {},
             loading: true,
-            slide: 1
+            slide: 1,
+            fullscreen: false
         }
     },
     mounted(){
