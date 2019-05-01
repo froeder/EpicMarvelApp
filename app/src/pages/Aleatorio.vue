@@ -107,9 +107,8 @@ export default {
             })
         },
         detalhes(personagem){
-            console.log(personagem)
+            sessionStorage.setItem('personagem'+personagem.id, JSON.stringify(personagem))
             this.$router.push({name: 'Detalhes', params:{id: personagem.id}})
-            
         }
     },
     beforeDestroy () {

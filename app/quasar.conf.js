@@ -58,7 +58,8 @@ module.exports = function (ctx) {
         'QSpace',
         'QCarousel',
         'QCarouselControl',
-        'QCarouselSlide'
+        'QCarouselSlide',
+        'SessionStorage'
       ],
 
       directives: [

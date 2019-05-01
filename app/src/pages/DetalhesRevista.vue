@@ -80,6 +80,7 @@ export default {
         }
     },
     mounted(){
+
         this.baixarRevista(this.id)
     },
     methods:{
@@ -92,6 +93,8 @@ export default {
                 googleTranslate.translate(resultado.description, 'pt', function(err, translation) {
                 let desc = translation.translatedText
                 self.quadrinho.description = desc
+                console.log(self.quadrinho)
+                // localStorage.setItem(self.id, JSON.stringify(self.quadrinho))
             });
             } 
                         
@@ -102,7 +105,6 @@ export default {
             MarvelApi.getComic(id, comics => {
                 let comic = comics.data.data.results
                 this.traduz(comics.data.data.results[0])
-                console.log(self.quadrinho)
                 self.loading = false
             }) 
         }

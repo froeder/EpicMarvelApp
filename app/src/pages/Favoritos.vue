@@ -79,9 +79,8 @@ export default {
         } 
     },
     detalhes(personagem){
-        console.log(personagem)
-        this.$router.push({name: 'Detalhes', params:{id: personagem.id}})
-        
+        this.$router.push({name: 'Detalhes', params:{id: personagem.id }})
+        sessionStorage.setItem('personagem'+personagem.id, JSON.stringify(personagem)) 
     }
   }
 }
